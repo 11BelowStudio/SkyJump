@@ -68,4 +68,16 @@ public abstract class GameObject {
         return position;
     }
 
+    public void startScrolling(boolean normalScroll){
+        if (normalScroll){
+            this.velocity.y = 192;
+        } else{
+            this.velocity.y = 384;
+        }
+    }
+
+    public void stopScrolling(){
+        this.velocity.y = 0;
+    }
+
 }

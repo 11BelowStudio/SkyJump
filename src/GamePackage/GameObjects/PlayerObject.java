@@ -18,7 +18,9 @@ import static GamePackage.GameObjects.ObjectConstants.PLAYER_SPRITESHEET;
 public class PlayerObject extends GameObject {
 
     boolean goingUp;
+    boolean lowPlatformJump; //whether or not the next jump is from the lowest platform
     boolean apex;
+    boolean haveWeStartedTheFire; //obligatory banepost; whether it's about to rise up
 
     static final int APEX_HEIGHT = 96;
 
@@ -27,7 +29,12 @@ public class PlayerObject extends GameObject {
 
     int directionToDraw;
 
+    double yVelocityChange;
+
     static final int MAX_SIDE_SPEED = 200;
+    static final int UP_Y_CHANGE = 0;
+    static final int DOWN_Y_CHANGE = 64;
+
 
     public PlayerObject(Controller c) {
         super(new Vector2D(256,256), new Vector2D(0,0));
@@ -38,14 +45,18 @@ public class PlayerObject extends GameObject {
         goingUp = false;
         ctrl = c;
         directionToDraw = 1;
+        yVelocityChange = DOWN_Y_CHANGE;
         apex = false;
+        haveWeStartedTheFire = false;
     }
 
     public PlayerObject revive(){
         goingUp = false;
         //ctrl = c;
         directionToDraw = 1;
+        yVelocityChange = DOWN_Y_CHANGE;
         apex = false;
+        haveWeStartedTheFire = false;
         return this;
     }
 
@@ -57,23 +68,39 @@ public class PlayerObject extends GameObject {
 
             Action currentAction = this.ctrl.action();
 
+            int currentDirection = currentAction.getDirection();
+            //System.out.println(currentDirection);
+
             if (goingUp) {
-                if (position.y < APEX_HEIGHT) {
-                    velocity.y = 10;
+                if (position.y <= APEX_HEIGHT) {
+                    velocity.y = 30;
                     goingUp = false;
                     apex = true;
                 }
             } else if (apex){
                 position.y = APEX_HEIGHT;
                 apex = false;
+                yVelocityChange = DOWN_Y_CHANGE;
+            } else if (haveWeStartedTheFire){
+                //the fire rises.
+                haveWeStartedTheFire = false;
+                goingUp = true;
+                if (lowPlatformJump){
+                    position.y = 384;
+                    //288 to jump
+                    velocity.y = -288;
+                } else{
+                    position.y = 192;
+                    //96 to jump
+                    velocity.y = -96;
+                }
+                System.out.println(position.y - APEX_HEIGHT);
+                yVelocityChange = UP_Y_CHANGE;
             }
 
 
-            int currentDirection = currentAction.getDirection();
-            System.out.println(currentDirection);
-            Vector2D addToVelocity = new Vector2D(currentDirection,20);
+            Vector2D addToVelocity = new Vector2D(currentDirection*40,yVelocityChange);
 
-            addToVelocity.x = currentDirection*40;
             velocity.addScaled(addToVelocity,DT);
 
             velocity.capX(MAX_SIDE_SPEED);
@@ -110,11 +137,44 @@ public class PlayerObject extends GameObject {
         return !goingUp;
     }
 
-    public double riseUp(){
-        velocity.y = -128;
-        goingUp = true;
+    public void riseUp(){
+        /*
+        if (position.y > 384){
+            position.y = 384;
+        } else if (position.y < 256 && position.y > 192){
+            position.y = 192;
+        }*/
+
+        velocity.y = 0;
+        haveWeStartedTheFire = true;
+
+        lowPlatformJump = (position.y > 256);
         System.out.println(position.y - APEX_HEIGHT);
-        return position.y - APEX_HEIGHT;
+        //return position.y - APEX_HEIGHT;
+    }
+
+    public boolean isLowPlatformJump(){
+        return lowPlatformJump;
+    }
+
+    public boolean verticalDirectionChange(){
+        return (apex || haveWeStartedTheFire);
+    }
+
+    public boolean hitTheApex(){
+        return apex;
+    }
+
+    public boolean theFireRises(){
+        return haveWeStartedTheFire;
+    }
+
+    public void startScrolling(boolean doubleScroll){
+        //no.
+    }
+
+    public void stopScrolling(){
+        //no.
     }
 
 }

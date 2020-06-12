@@ -30,6 +30,13 @@ public class JumpPlatform extends GameObject implements Collidable{
         return this;
     }
 
+    @Override
+    public void update() {
+        super.update();
+        if (position.y > 512){
+            this.alive = false;
+        }
+    }
 
     @Override
     void renderObject(Graphics2D g) {
@@ -39,7 +46,7 @@ public class JumpPlatform extends GameObject implements Collidable{
     @Override
     public boolean collideWithPlayer(PlayerObject p) {
         Vector2D playerPos = p.getPos();
-        return (playerPos.xDist(position,512) < 48 && playerPos.yDist(position) < 32);
+        return (playerPos.xDist(position,512) < 64 && playerPos.yDist(position) < 32);
     }
 }
 
