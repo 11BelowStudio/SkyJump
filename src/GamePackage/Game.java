@@ -56,6 +56,9 @@ public class Game extends Model {
         for (GameObject o: deadObjects){
             if (o instanceof JumpPlatform){
                 platformStack.push((JumpPlatform) o);
+            } else if (o instanceof PlayerObject){
+                gameOver = true;
+                System.out.println("u died lmao");
             }
         }
 

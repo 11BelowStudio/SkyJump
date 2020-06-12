@@ -111,6 +111,7 @@ public class PlayerObject extends GameObject {
 
             directionToDraw = currentDirection+1;
         }
+        amIAlive();
     }
 
     void renderObject(Graphics2D g){

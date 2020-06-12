@@ -31,14 +31,6 @@ public class JumpPlatform extends GameObject implements Collidable{
     }
 
     @Override
-    public void update() {
-        super.update();
-        if (position.y > 512){
-            this.alive = false;
-        }
-    }
-
-    @Override
     void renderObject(Graphics2D g) {
         g.drawImage(CLOUD,-48,0,null);
     }

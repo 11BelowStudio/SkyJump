@@ -44,9 +44,16 @@ public abstract class GameObject {
     }
 
     public void update(){
-        if (alive) {
+        amIAlive();
+        if (alive){
             position.addScaled(velocity, DT);
             position.wrapX(DEFAULT_SIZE);
+        }
+    }
+
+    void amIAlive(){
+        if (position.y > 512){
+            this.alive = false;
         }
     }
 
