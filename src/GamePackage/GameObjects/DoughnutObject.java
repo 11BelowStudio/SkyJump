@@ -1,5 +1,6 @@
 package GamePackage.GameObjects;
 
+import utilities.SoundManager;
 import utilities.Vector2D;
 
 import java.awt.*;
@@ -44,6 +45,7 @@ public class DoughnutObject extends GameObject implements Collidable{
         Vector2D playerPos = p.getPos();
         boolean hit = (playerPos.xDist(position,512) < 32 && playerPos.yDist(position) < 48);
         if (hit){
+            SoundManager.playEat();
             alive = false;
         }
         return hit;

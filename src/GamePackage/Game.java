@@ -3,6 +3,7 @@ package GamePackage;
 
 import GamePackage.GameObjects.*;
 import utilities.HighScoreHandler;
+import utilities.SoundManager;
 import utilities.Vector2D;
 
 import java.awt.*;
@@ -77,7 +78,7 @@ public class Game extends Model {
             {
                 if (o instanceof JumpPlatform) {
                     if (((JumpPlatform) o).collideWithPlayer(player)) {
-                        System.out.println("OH LAWD IT'S HAPPENED");
+                        SoundManager.playClap();
                         player.riseUp();
                     }
                 }
@@ -94,6 +95,7 @@ public class Game extends Model {
                 } else if (o instanceof PlayerObject){
                     gameOver = true;
                     System.out.println("u died lmao");
+                    SoundManager.playCrunch();
                 }
             }
         }
@@ -250,4 +252,7 @@ public class Game extends Model {
         score += addToScore;
         scoreDisplay.showValue(score);
     }
+
+
+    //TODO: change background colours over time (fade proportional to score?)
 }

@@ -3,8 +3,9 @@ package utilities;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
+import java.io.File;
 //import java.io.File;
-import java.util.Arrays;
+
 
 // SoundManager for Asteroids
 
@@ -21,7 +22,7 @@ public class SoundManager {
 
 
     // this may need modifying
-    private final static String path = "/sounds/";
+    private final static String path = "sounds/";
 
     // note: having too many clips open may cause
     // "LineUnavailableException: No Free Voices"
@@ -29,15 +30,17 @@ public class SoundManager {
 
 
     //private final static Clip andYouFailed = getClip("andYouFailed");
-    //private final static Clip gameTheme = getClip("AnSoundtrack");
+    private final static Clip gameTheme = getClip("SkyJumpGameMusic");
+    private final static Clip menuTheme = getClip("SkyJumpIntro");
     //private final static Clip bweb = getClip("bweb");
     //private final static Clip bwoab = getClip("bwoab");
-    //private final static Clip clap = getClip("clap");
-    //private final static Clip crunch = getClip("crunch");
+    private final static Clip clap = getClip("clap");
+    private final static Clip eatingNoise = getClip("eatingNoise");
+    private final static Clip crunch = getClip("crunch");
     //private final static Clip intimidating = getClip("duDOOOO");
     //private final static Clip hum = getClip("hum");
     //private final static Clip longCrunch = getClip("longCrunch");
-    //private final static Clip menuTheme = getClip("MenuTheme");
+
     //private final static Clip mediumCrunch = getClip("notAsLongCrunch");
     //private final static Clip ohno = getClip("ohno");
     //private final static Clip solidHit = getClip("solidHit");
@@ -62,7 +65,7 @@ public class SoundManager {
         Clip clip = null;
         try {
             clip = AudioSystem.getClip();
-            AudioInputStream sample = AudioSystem.getAudioInputStream(SoundManager.class.getResourceAsStream(path + filename + ".wav"));
+            AudioInputStream sample = AudioSystem.getAudioInputStream(new File(path + filename + ".wav"));
             clip.open(sample);
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,36 +102,38 @@ public class SoundManager {
 
     public static void startMenu(){
         if (!playingMenu){
-            //menuTheme.loop(-1);
+            menuTheme.loop(-1);
             playingMenu = true;
         }
     }
 
     public static void stopMenu(){
-        //menuTheme.loop(0);
-        //menuTheme.stop();
+        menuTheme.loop(0);
+        menuTheme.stop();
         playingMenu = false;
     }
 
     public static void startGame(){
         if (!playingGameTheme){
-            //gameTheme.loop(-1);
+            gameTheme.loop(-1);
             playingGameTheme = true;
         }
     }
 
     public static void stopGame(){
-        //gameTheme.loop(0);
-        //gameTheme.stop();
+        gameTheme.loop(0);
+        gameTheme.stop();
         playingGameTheme = false;
     }
 
     //playing a particular sound
+    public static void playClap(){ play(clap); }
+    public static void playEat(){ play(eatingNoise); }
     //public static void playBweb(){ play(bweb); }
     //public static void playBwoab(){ play(bwoab); }
     //public static void playOhNo(){ play(ohno); }
     //public static void playAndYouFailed(){ play(andYouFailed); }
-    //public static void playCrunch(){ play(crunch); }
+    public static void playCrunch(){ play(crunch); }
     //public static void playMedCrunch(){ play(mediumCrunch); }
     //public static void playIntimidating(){ play(intimidating); }
     //public static void playExplosion(){ play(explosion); }
