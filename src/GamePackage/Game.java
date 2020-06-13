@@ -229,7 +229,7 @@ public class Game extends Model {
 
         doughnutSpawnChance = backgroundSpawnChance = 1;
 
-        switch ((int)(Math.random() * 3)){
+        switch ((int)(Math.random() * 4)){
             case 0:
                 backgroundColor = SKYBLUE;
                 break;
@@ -238,6 +238,9 @@ public class Game extends Model {
                 break;
             case 2:
                 backgroundColor = SUNRISE;
+                break;
+            case 3:
+                backgroundColor = SUNSET;
                 break;
         }
 

@@ -36,6 +36,8 @@ public abstract class Model {
     static Color NIGHT = new Color(40, 43, 47);
     //sunrise: cfb48a
     static Color SUNRISE = new Color(207, 180, 138);
+    //sunset pink: e3bbbd
+    static Color SUNSET = new Color(227, 187, 189);
 
 
 
@@ -52,7 +54,7 @@ public abstract class Model {
 
         gameOver = false;
         stopThat = false;
-        backgroundColor = Color.CYAN;
+        backgroundColor = SKYBLUE;
         this.hs = hs;
         this.ctrl = ctrl;
     }
