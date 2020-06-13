@@ -87,32 +87,27 @@ public class StringObject extends GameObject {
             FontMetrics metrics = g.getFontMetrics(g.getFont());
             int w = metrics.stringWidth(thisString);
             int h = metrics.getHeight();
+            int widthOffset;
             switch (alignment){
+                default:
+                    widthOffset = alignment;
+                    break;
                 case 0:
-                    g.drawString(thisString,1,1);
-                    g.drawString(thisString,-1,1);
-                    g.drawString(thisString,-1,-1);
-                    g.drawString(thisString,1,-1);
-                    g.setColor(objectColour);
-                    g.drawString(thisString,0,0);
+                    widthOffset = 0;
                     break;
                 case 1:
-                    g.drawString(thisString,-w+1,1);
-                    g.drawString(thisString,-w-1,1);
-                    g.drawString(thisString,-w-1,-1);
-                    g.drawString(thisString,-w+1,-1);
-                    g.setColor(objectColour);
-                    g.drawString(thisString, -w, 0);
+                    widthOffset = -w;
                     break;
                 case 2:
-                    g.drawString(thisString,-(w/2)+1,1);
-                    g.drawString(thisString,-(w/2)-1,1);
-                    g.drawString(thisString,-(w/2)-1,-1);
-                    g.drawString(thisString,-(w/2)+1,-1);
-                    g.setColor(objectColour);
-                    g.drawString(thisString, -(w / 2), 0);
+                    widthOffset = -(w/2);
                     break;
             }
+            g.drawString(thisString,widthOffset+1,1);
+            g.drawString(thisString,widthOffset-1,1);
+            g.drawString(thisString,widthOffset-1,-1);
+            g.drawString(thisString,widthOffset+1,-1);
+            g.setColor(objectColour);
+            g.drawString(thisString,widthOffset,0);
             g.setFont(tempFont);
             areaRectangle = new Rectangle((int)position.x - w/2, (int)position.y - h/2,w,h);
         }

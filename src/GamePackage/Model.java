@@ -30,6 +30,15 @@ public abstract class Model {
 
     HighScoreHandler hs;
 
+    //Sky blue: 94bfac
+    static Color SKYBLUE =new Color(48, 191, 172);
+    //night: 282b2f
+    static Color NIGHT = new Color(40, 43, 47);
+    //sunrise: cfb48a
+    static Color SUNRISE = new Color(207, 180, 138);
+
+
+
     public Model(Controller ctrl, HighScoreHandler hs){
         gameObjects = new ArrayList<>();
         hudObjects = new ArrayList<>();
@@ -52,11 +61,11 @@ public abstract class Model {
         g.setColor(backgroundColor);
         g.fill(backgroundRect);
         synchronized (Model.class) {
-            /*
+
             for (GameObject o: backgroundObjects){
                 o.draw(g);
                 //draws background objects
-            }*/
+            }
             for (GameObject o : gameObjects) {
                 o.draw(g);
                 //basically calls the draw method of each gameObject

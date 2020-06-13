@@ -35,6 +35,8 @@ public class PlayerObject extends GameObject {
     static final int UP_Y_CHANGE = 0;
     static final int DOWN_Y_CHANGE = 128;
 
+    static final double SIDEWAYS_DRAG = 0.985;
+
 
     public PlayerObject(Controller c) {
         super(new Vector2D(256,256), new Vector2D(0,0));
@@ -102,9 +104,10 @@ public class PlayerObject extends GameObject {
             }
 
 
-            Vector2D addToVelocity = new Vector2D(currentDirection*40,yVelocityChange);
+            Vector2D addToVelocity = new Vector2D(currentDirection*128,yVelocityChange);
 
             velocity.addScaled(addToVelocity,DT);
+            velocity.multX(SIDEWAYS_DRAG);
 
             velocity.capX(MAX_SIDE_SPEED);
 

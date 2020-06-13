@@ -21,8 +21,8 @@ public class DoughnutObject extends GameObject implements Collidable{
     public DoughnutObject revive(){
         super.revive(
                 new Vector2D(
-                        16 + (Math.random()*448),
-                        -16 + (Math.random() * -448)
+                        16 + (Math.random()*480),
+                        -16 + (Math.random() * -480)
                 ),
                 new Vector2D(0,0)
         );

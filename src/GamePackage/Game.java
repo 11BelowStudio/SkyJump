@@ -5,6 +5,7 @@ import GamePackage.GameObjects.*;
 import utilities.HighScoreHandler;
 import utilities.Vector2D;
 
+import java.awt.*;
 import java.util.Stack;
 
 public class Game extends Model {
@@ -15,6 +16,8 @@ public class Game extends Model {
 
     Stack<DoughnutObject> doughnutStack;
 
+    Stack<BackgroundObject> backgroundStack;
+
     AttributeStringObject<Integer> scoreDisplay;
 
     static final double ABOVE_PLAT_2JUMP = -160;
@@ -22,6 +25,10 @@ public class Game extends Model {
 
     int doughnutSpawnChance;
     static final double DOUGHNUT_CHANCES = 10;
+
+    int backgroundSpawnChance;
+    static final double BACKGROUND_CHANCES = 5;
+
 
     Integer score;
 
@@ -84,6 +91,9 @@ public class Game extends Model {
                     doughnutStack.push((DoughnutObject) o);
                 } else if (o instanceof JumpPlatform){
                     platformStack.push((JumpPlatform) o);
+                } else if (o instanceof PlayerObject){
+                    gameOver = true;
+                    System.out.println("u died lmao");
                 }
             }
         }
@@ -94,6 +104,17 @@ public class Game extends Model {
                 aliveHUD.add(o);
             } else{
                 deadObjects.add(o);
+            }
+        }
+
+        for  (GameObject o: backgroundObjects){
+            o.update();
+            if (o.stillAlive()){
+                aliveBackground.add(o);
+            } else{
+                if (o instanceof BackgroundObject){
+                    backgroundStack.push((BackgroundObject) o);
+                }
             }
         }
 
@@ -109,15 +130,13 @@ public class Game extends Model {
             }
         }*/
 
-        if (!player.stillAlive()){
-            gameOver = true;
-            System.out.println("u died lmao");
-        }
-
         if (player.verticalDirectionChange()) { //OH BOY TIME TO START/STOP SCROLLING
             boolean lowJump = player.isLowPlatformJump();
             if (player.theFireRises()) {
                 for (GameObject o : aliveGameObjects) {
+                    o.startScrolling(lowJump);
+                }
+                for (GameObject o: aliveBackground){
                     o.startScrolling(lowJump);
                 }
                 if (lowJump){
@@ -129,11 +148,14 @@ public class Game extends Model {
                 for (GameObject o : aliveGameObjects) {
                     o.stopScrolling();
                 }
+                for (GameObject o: aliveBackground){
+                    o.stopScrolling();
+                }
                 aliveGameObjects.add(platformStack.pop().revive(ABOVE_PLAT_1JUMP));
                 if (!lowJump){
                     aliveGameObjects.add(platformStack.pop().revive(ABOVE_PLAT_2JUMP));
                 }
-                if (!doughnutStack.empty()){
+                if (!doughnutStack.isEmpty()){
                     if ((Math.random() * DOUGHNUT_CHANCES) < doughnutSpawnChance){
                         aliveGameObjects.add(doughnutStack.pop().revive());
                         doughnutSpawnChance = 1;
@@ -142,6 +164,21 @@ public class Game extends Model {
                     }
 
                 }
+
+
+                for (int i = 0; i < 3; i++) {
+                    if (!backgroundStack.isEmpty()) {
+                        if (((Math.random() * BACKGROUND_CHANCES)) < backgroundSpawnChance) {
+                            aliveBackground.add(backgroundStack.pop().revive());
+                            backgroundSpawnChance = 1;
+                        } else{
+                            backgroundSpawnChance++;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+
             }
         }
         if (gameOver){
@@ -176,11 +213,33 @@ public class Game extends Model {
         }
         gameObjects.add(doughnutStack.pop().revive());
 
+        backgroundStack = new Stack<>();
+
+        for (int i = 0; i < 10; i++){
+            backgroundStack.push(new BackgroundObject());
+        }
+        backgroundObjects.add(backgroundStack.pop().revive());
+        backgroundObjects.add(backgroundStack.pop().revive());
+
+
+
 
         stopThat = false;
         gameOver = false;
 
-        doughnutSpawnChance = 1;
+        doughnutSpawnChance = backgroundSpawnChance = 1;
+
+        switch ((int)(Math.random() * 3)){
+            case 0:
+                backgroundColor = SKYBLUE;
+                break;
+            case 1:
+                backgroundColor = NIGHT;
+                break;
+            case 2:
+                backgroundColor = SUNRISE;
+                break;
+        }
 
     }
 

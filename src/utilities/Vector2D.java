@@ -155,6 +155,11 @@ public final class Vector2D {
         this.y = y*fac;
         return this;
     }
+
+    public Vector2D multX(double xFac){
+        this.x *= xFac;
+        return this;
+    }
     public static Vector2D mult(Vector2D v, double fac){
         Vector2D result = new Vector2D(v);
         return result.mult(fac);

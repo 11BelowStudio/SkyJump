@@ -3,16 +3,15 @@ package GamePackage.GameObjects;
 import utilities.Vector2D;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
-import static GamePackage.GameObjects.ObjectConstants.CLOUD;
+import static GamePackage.GameObjects.ObjectConstants.PLATFORM;
 
 public class JumpPlatform extends GameObject implements Collidable{
 
 
     public JumpPlatform() {
         super(new Vector2D(0,0), new Vector2D(0,0));
-        img = CLOUD;
+        img = PLATFORM;
         width = 96;
         height = 32;
     }
@@ -31,9 +30,7 @@ public class JumpPlatform extends GameObject implements Collidable{
     }
 
     @Override
-    void renderObject(Graphics2D g) {
-        g.drawImage(img,-48,0,null);
-    }
+    void renderObject(Graphics2D g) { g.drawImage(img,-48,0,null); }
 
     @Override
     public boolean collideWithPlayer(PlayerObject p) {
