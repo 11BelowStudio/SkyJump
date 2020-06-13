@@ -12,7 +12,7 @@ public class TitleScreen extends Model {
 
     @Override
     public Model revive() {
-        return this;
+        super.revive(); return this;
     }
 
     @Override

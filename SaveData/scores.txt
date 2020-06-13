@@ -1,12 +1,28 @@
+unknown
+25
 fluffy clouds
 22
+officer obie
+21
+alice's resturant
+17
+wack
+11
 no
 11
+unknown
+10
+unknown
+8
 k
+6
+arlo guthrie
 6
 no
 5
 k
+5
+whitehall street
 5
 donut
 4
@@ -14,6 +30,8 @@ no
 4
 420
 3
+obie said he was making sure
+1
 es
 1
 unknown

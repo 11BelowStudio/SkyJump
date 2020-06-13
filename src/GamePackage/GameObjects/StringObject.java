@@ -90,16 +90,25 @@ public class StringObject extends GameObject {
             switch (alignment){
                 case 0:
                     g.drawString(thisString,1,1);
+                    g.drawString(thisString,-1,1);
+                    g.drawString(thisString,-1,-1);
+                    g.drawString(thisString,1,-1);
                     g.setColor(objectColour);
                     g.drawString(thisString,0,0);
                     break;
                 case 1:
                     g.drawString(thisString,-w+1,1);
+                    g.drawString(thisString,-w-1,1);
+                    g.drawString(thisString,-w-1,-1);
+                    g.drawString(thisString,-w+1,-1);
                     g.setColor(objectColour);
                     g.drawString(thisString, -w, 0);
                     break;
                 case 2:
                     g.drawString(thisString,-(w/2)+1,1);
+                    g.drawString(thisString,-(w/2)-1,1);
+                    g.drawString(thisString,-(w/2)-1,-1);
+                    g.drawString(thisString,-(w/2)+1,-1);
                     g.setColor(objectColour);
                     g.drawString(thisString, -(w / 2), 0);
                     break;

@@ -40,7 +40,7 @@ public class PlayerObject extends GameObject {
         super(new Vector2D(256,256), new Vector2D(0,0));
         img = PLAYER_SPRITESHEET;
         width = 32;
-        height = 64;
+        height = 48;
 
         goingUp = false;
         ctrl = c;
@@ -125,18 +125,6 @@ public class PlayerObject extends GameObject {
         int spriteCol = directionToDraw*32;
         //middle if no direction pressed, left if going left, right if going right
 
-        /*
-        g.drawImage(img,
-                -16,
-                -32,
-                16,
-                32,
-                spriteCol,
-                spriteRow,
-                spriteCol+32,
-                spriteRow+64,
-                null
-        );*/
         g.drawImage(img,
                 -16,
                 -24,
@@ -165,7 +153,7 @@ public class PlayerObject extends GameObject {
         velocity.y = 0;
         haveWeStartedTheFire = true;
 
-        lowPlatformJump = (position.y > 256);
+        lowPlatformJump = (position.y > 320);
         System.out.println(position.y - APEX_HEIGHT);
         //return position.y - APEX_HEIGHT;
     }

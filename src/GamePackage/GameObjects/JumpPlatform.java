@@ -32,7 +32,7 @@ public class JumpPlatform extends GameObject implements Collidable{
 
     @Override
     void renderObject(Graphics2D g) {
-        g.drawImage(CLOUD,-48,0,null);
+        g.drawImage(img,-48,0,null);
     }
 
     @Override

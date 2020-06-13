@@ -13,10 +13,15 @@ public class Game extends Model {
 
     Stack<JumpPlatform> platformStack;
 
+    Stack<DoughnutObject> doughnutStack;
+
     AttributeStringObject<Integer> scoreDisplay;
 
     static final double ABOVE_PLAT_2JUMP = -160;
     static final double ABOVE_PLAT_1JUMP = -352;
+
+    int doughnutSpawnChance;
+    static final double DOUGHNUT_CHANCES = 10;
 
     Integer score;
 
@@ -54,7 +59,15 @@ public class Game extends Model {
     public void update() {
         for(GameObject o: gameObjects){
             o.update();
-            if (player.comingDown()) {
+            if (o instanceof DoughnutObject)
+            {
+                //checks to see if this doughnut has been collected
+                if (((DoughnutObject) o).collideWithPlayer(player)){
+                    updateScore(((DoughnutObject) o).getPoints());
+                }
+            }
+            else if (player.comingDown())
+            {
                 if (o instanceof JumpPlatform) {
                     if (((JumpPlatform) o).collideWithPlayer(player)) {
                         System.out.println("OH LAWD IT'S HAPPENED");
@@ -62,10 +75,16 @@ public class Game extends Model {
                     }
                 }
             }
+
             if (o.stillAlive()){
                 aliveGameObjects.add(o);
             } else{
-                deadObjects.add(o);
+                //deadObjects.add(o);
+                if (o instanceof DoughnutObject){
+                    doughnutStack.push((DoughnutObject) o);
+                } else if (o instanceof JumpPlatform){
+                    platformStack.push((JumpPlatform) o);
+                }
             }
         }
 
@@ -78,13 +97,21 @@ public class Game extends Model {
             }
         }
 
+        /*
         for (GameObject o: deadObjects){
-            if (o instanceof JumpPlatform){
+            if (o instanceof DoughnutObject){
+                doughnutStack.push((DoughnutObject) o);
+            } else if (o instanceof JumpPlatform){
                 platformStack.push((JumpPlatform) o);
             } else if (o instanceof PlayerObject){
                 gameOver = true;
                 System.out.println("u died lmao");
             }
+        }*/
+
+        if (!player.stillAlive()){
+            gameOver = true;
+            System.out.println("u died lmao");
         }
 
         if (player.verticalDirectionChange()) { //OH BOY TIME TO START/STOP SCROLLING
@@ -93,11 +120,11 @@ public class Game extends Model {
                 for (GameObject o : aliveGameObjects) {
                     o.startScrolling(lowJump);
                 }
-                score += 1;
-                if (!lowJump){
-                    score += 1;
+                if (lowJump){
+                    updateScore(1);
+                } else{
+                    updateScore(2);
                 }
-                scoreDisplay.showValue(score);
             } else if (player.hitTheApex()) {
                 for (GameObject o : aliveGameObjects) {
                     o.stopScrolling();
@@ -105,6 +132,15 @@ public class Game extends Model {
                 aliveGameObjects.add(platformStack.pop().revive(ABOVE_PLAT_1JUMP));
                 if (!lowJump){
                     aliveGameObjects.add(platformStack.pop().revive(ABOVE_PLAT_2JUMP));
+                }
+                if (!doughnutStack.empty()){
+                    if ((Math.random() * DOUGHNUT_CHANCES) < doughnutSpawnChance){
+                        aliveGameObjects.add(doughnutStack.pop().revive());
+                        doughnutSpawnChance = 1;
+                    } else{
+                        doughnutSpawnChance++;
+                    }
+
                 }
             }
         }
@@ -134,8 +170,22 @@ public class Game extends Model {
         gameObjects.add(platformStack.pop().revive(-160));
         gameObjects.add(platformStack.pop().revive(-352));
 
+        doughnutStack = new Stack<>();
+        for (int i = 0; i < 5; i++) {
+            doughnutStack.push(new DoughnutObject());
+        }
+        gameObjects.add(doughnutStack.pop().revive());
+
+
         stopThat = false;
         gameOver = false;
 
+        doughnutSpawnChance = 1;
+
+    }
+
+    private void updateScore(int addToScore){
+        score += addToScore;
+        scoreDisplay.showValue(score);
     }
 }

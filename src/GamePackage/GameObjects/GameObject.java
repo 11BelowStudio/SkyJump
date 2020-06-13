@@ -52,7 +52,7 @@ public abstract class GameObject {
     }
 
     void amIAlive(){
-        if (position.y > 512){
+        if (position.y >= 512){
             this.alive = false;
         }
     }
