@@ -24,7 +24,7 @@ public abstract class Model {
 
     boolean gameOver;
 
-    boolean carryOnAsYouWere;
+    boolean stopThat;
 
     Controller ctrl;
 
@@ -42,8 +42,10 @@ public abstract class Model {
         deadObjects = new ArrayList<>();
 
         gameOver = false;
-        carryOnAsYouWere = true;
+        stopThat = false;
         backgroundColor = Color.CYAN;
+        this.hs = hs;
+        this.ctrl = ctrl;
     }
 
     public void draw(Graphics2D g){
@@ -59,11 +61,11 @@ public abstract class Model {
                 o.draw(g);
                 //basically calls the draw method of each gameObject
             }
-            /*
+
             for (GameObject o : hudObjects) {
                 o.draw(g);
                 //and then the HUD (so its displayed above the game objects)
-            }*/
+            }
         }
     }
 
@@ -86,11 +88,23 @@ public abstract class Model {
         deadObjects.clear();
     }
 
-    abstract public Model revive();
+    void endThis(){
+        stopThat = true;
+    }
+
+    public Model revive(){
+        ctrl.noAction();
+        refreshLists();
+        backgroundObjects.clear();
+        gameObjects.clear();
+        hudObjects.clear();
+
+        return this;
+    }
 
     abstract public void update();
 
     public boolean keepGoing(){
-        return carryOnAsYouWere;
+        return !stopThat;
     }
 }

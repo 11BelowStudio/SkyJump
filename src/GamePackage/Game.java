@@ -1,9 +1,7 @@
 package GamePackage;
 
-import GamePackage.GameObjects.Collidable;
-import GamePackage.GameObjects.GameObject;
-import GamePackage.GameObjects.JumpPlatform;
-import GamePackage.GameObjects.PlayerObject;
+
+import GamePackage.GameObjects.*;
 import utilities.HighScoreHandler;
 import utilities.Vector2D;
 
@@ -15,22 +13,40 @@ public class Game extends Model {
 
     Stack<JumpPlatform> platformStack;
 
+    AttributeStringObject<Integer> scoreDisplay;
+
     static final double ABOVE_PLAT_2JUMP = -160;
     static final double ABOVE_PLAT_1JUMP = -352;
+
+    Integer score;
 
     public Game(Controller c, HighScoreHandler hs) {
         super(c, hs);
         player = new PlayerObject(c);
-        gameObjects.add(player);
-        setupStacks();
+        score = 0;
+
+        scoreDisplay = new AttributeStringObject<>(
+                new Vector2D(256,20),
+                new Vector2D(0,0),
+                "Score: ",
+                score,
+                StringObject.MIDDLE_ALIGN
+        );
+        setupModel();
+    }
+
+    @Override
+    void endThis() {
+        if (ctrl.theAnyButton()) {
+            hs.recordHighScore(score);
+            stopThat = true;
+        }
     }
 
     @Override
     public Model revive() {
-        refreshLists();
-        player.revive();
-        gameObjects.add(player);
-        setupStacks();
+        super.revive();
+        setupModel();
         return this;
     }
 
@@ -53,6 +69,15 @@ public class Game extends Model {
             }
         }
 
+        for (GameObject o: hudObjects){
+            o.update();
+            if (o.stillAlive()){
+                aliveHUD.add(o);
+            } else{
+                deadObjects.add(o);
+            }
+        }
+
         for (GameObject o: deadObjects){
             if (o instanceof JumpPlatform){
                 platformStack.push((JumpPlatform) o);
@@ -62,12 +87,17 @@ public class Game extends Model {
             }
         }
 
-        if (player.verticalDirectionChange()) {
+        if (player.verticalDirectionChange()) { //OH BOY TIME TO START/STOP SCROLLING
             boolean lowJump = player.isLowPlatformJump();
             if (player.theFireRises()) {
                 for (GameObject o : aliveGameObjects) {
                     o.startScrolling(lowJump);
                 }
+                score += 1;
+                if (!lowJump){
+                    score += 1;
+                }
+                scoreDisplay.showValue(score);
             } else if (player.hitTheApex()) {
                 for (GameObject o : aliveGameObjects) {
                     o.stopScrolling();
@@ -78,10 +108,21 @@ public class Game extends Model {
                 }
             }
         }
+        if (gameOver){
+            endThis();
+        }
         refreshLists();
     }
 
-    private void setupStacks(){
+    private void setupModel(){
+
+        score = 0;
+        gameObjects.add(player.revive());
+
+        scoreDisplay.showValue(score);
+        hudObjects.add(scoreDisplay.revive());
+
+
         platformStack = new Stack<>();
         for (int i = 0; i < 6; i++) {
             platformStack.push(new JumpPlatform());
@@ -92,5 +133,9 @@ public class Game extends Model {
         gameObjects.add(platformStack.pop().revive(32));
         gameObjects.add(platformStack.pop().revive(-160));
         gameObjects.add(platformStack.pop().revive(-352));
+
+        stopThat = false;
+        gameOver = false;
+
     }
 }

@@ -37,7 +37,7 @@ public abstract class GameObject {
     }
 
     public GameObject revive(Vector2D p, Vector2D v){
-        this.revive();
+        alive = true;
         position = p;
         velocity = v;
         return this;

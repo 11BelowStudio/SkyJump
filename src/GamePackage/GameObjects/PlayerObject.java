@@ -33,7 +33,7 @@ public class PlayerObject extends GameObject {
 
     static final int MAX_SIDE_SPEED = 200;
     static final int UP_Y_CHANGE = 0;
-    static final int DOWN_Y_CHANGE = 64;
+    static final int DOWN_Y_CHANGE = 128;
 
 
     public PlayerObject(Controller c) {
@@ -51,6 +51,9 @@ public class PlayerObject extends GameObject {
     }
 
     public PlayerObject revive(){
+        super.revive();
+        position.set(256,256);
+        velocity.set(0,0);
         goingUp = false;
         //ctrl = c;
         directionToDraw = 1;
@@ -116,11 +119,13 @@ public class PlayerObject extends GameObject {
 
     void renderObject(Graphics2D g){
 
-        int spriteRow = goingUp ? 0 : 64;
+        //int spriteRow = goingUp ? 0 : 64;
+        int spriteRow = goingUp ? 0 : 48;
         //top row drawn if going up, bottom row if going down
         int spriteCol = directionToDraw*32;
         //middle if no direction pressed, left if going left, right if going right
 
+        /*
         g.drawImage(img,
                 -16,
                 -32,
@@ -130,6 +135,17 @@ public class PlayerObject extends GameObject {
                 spriteRow,
                 spriteCol+32,
                 spriteRow+64,
+                null
+        );*/
+        g.drawImage(img,
+                -16,
+                -24,
+                16,
+                24,
+                spriteCol,
+                spriteRow,
+                spriteCol+32,
+                spriteRow+48,
                 null
         );
     }

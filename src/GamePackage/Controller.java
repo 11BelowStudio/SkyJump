@@ -79,4 +79,8 @@ public class Controller implements MouseListener, KeyListener {
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    public boolean theAnyButton(){ return action.theAnyButton; }
+
+    public void noAction(){action.noAction();}
 }

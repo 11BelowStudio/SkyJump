@@ -7,7 +7,7 @@ public class TitleScreen extends Model {
 
     public TitleScreen(Controller ctrl, HighScoreHandler hs) {
         super(ctrl, hs);
-        carryOnAsYouWere = false;
+        stopThat = true;
     }
 
     @Override

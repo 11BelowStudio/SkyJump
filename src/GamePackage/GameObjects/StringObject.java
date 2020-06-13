@@ -83,18 +83,24 @@ public class StringObject extends GameObject {
         if (alive) {
             Font tempFont = g.getFont();
             g.setFont(theFont);
-            g.setColor(objectColour);
+            g.setColor(Color.black);
             FontMetrics metrics = g.getFontMetrics(g.getFont());
             int w = metrics.stringWidth(thisString);
             int h = metrics.getHeight();
             switch (alignment){
                 case 0:
+                    g.drawString(thisString,1,1);
+                    g.setColor(objectColour);
                     g.drawString(thisString,0,0);
                     break;
                 case 1:
+                    g.drawString(thisString,-w+1,1);
+                    g.setColor(objectColour);
                     g.drawString(thisString, -w, 0);
                     break;
                 case 2:
+                    g.drawString(thisString,-(w/2)+1,1);
+                    g.setColor(objectColour);
                     g.drawString(thisString, -(w / 2), 0);
                     break;
             }
