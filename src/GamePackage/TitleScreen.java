@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 
 public class TitleScreen extends Model {
-    
+
 
     private boolean showingTitle;
 

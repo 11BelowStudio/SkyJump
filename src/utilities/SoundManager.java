@@ -15,8 +15,7 @@ import java.io.File;
 
 public class SoundManager {
 
-    //private static int nBullet = 0;
-    //private static boolean thrusting = false;
+
     private static boolean playingMenu = false;
     private static boolean playingGameTheme = false;
 
@@ -24,33 +23,13 @@ public class SoundManager {
     // this may need modifying
     private final static String path = "sounds/";
 
-    // note: having too many clips open may cause
-    // "LineUnavailableException: No Free Voices"
-    //private final static Clip[] bullets = new Clip[15];
-
-
-    //private final static Clip andYouFailed = getClip("andYouFailed");
     private final static Clip gameTheme = getClip("SkyJumpGameMusic");
     private final static Clip menuTheme = getClip("SkyJumpIntro");
-    //private final static Clip bweb = getClip("bweb");
-    //private final static Clip bwoab = getClip("bwoab");
     private final static Clip clap = getClip("clap");
     private final static Clip eatingNoise = getClip("eatingNoise");
     private final static Clip crunch = getClip("crunch");
-    //private final static Clip intimidating = getClip("duDOOOO");
-    //private final static Clip hum = getClip("hum");
-    //private final static Clip longCrunch = getClip("longCrunch");
-
-    //private final static Clip mediumCrunch = getClip("notAsLongCrunch");
-    //private final static Clip ohno = getClip("ohno");
-    //private final static Clip solidHit = getClip("solidHit");
-    //private final static Clip explosion = getClip("WeirdExplosion");
-    //private final static Clip yerDead = getClip("yerDead");
     private final static Clip nice = getClip("nice");
 
-    //static {
-        //Arrays.fill(bullets, clap);
-    //}
 
 
     // methods which do not modify any fields
@@ -72,32 +51,6 @@ public class SoundManager {
         }
         return clip;
     }
-
-    // methods which modify (static) fields
-
-    /*
-    public static void fire() {
-        // fire the n-th bullet and increment the index
-        Clip clip = bullets[nBullet];
-        clip.setFramePosition(0);
-        clip.start();
-        nBullet = (nBullet + 1) % bullets.length;
-    }
-
-    public static void startThrust() {
-        if (!thrusting) {
-            hum.loop(-1);
-            thrusting = true;
-        }
-    }
-
-    public static void stopThrust() {
-        hum.loop(0);
-        hum.stop();
-        thrusting = false;
-    }
-
-     */
 
 
     public static void startMenu(){
@@ -129,18 +82,11 @@ public class SoundManager {
     //playing a particular sound
     public static void playClap(){ play(clap); }
     public static void playEat(){ play(eatingNoise); }
-    //public static void playBweb(){ play(bweb); }
-    //public static void playBwoab(){ play(bwoab); }
-    //public static void playOhNo(){ play(ohno); }
-    //public static void playAndYouFailed(){ play(andYouFailed); }
+
     public static void playCrunch(){ play(crunch); }
-    //public static void playMedCrunch(){ play(mediumCrunch); }
-    //public static void playIntimidating(){ play(intimidating); }
-    //public static void playExplosion(){ play(explosion); }
+
     public static void playNice(){ play(nice); }
-    //public static void playSolidHit(){ play(solidHit); }
-    //public static void playLongCrunch(){ play(longCrunch);}
-    //public static void playYerDead(){ play(yerDead); }
+
 
 
 
