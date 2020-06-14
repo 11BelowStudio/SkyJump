@@ -1,9 +1,8 @@
 package GamePackage.GameObjects;
 
-import utilities.Vector2D;
+import GamePackage.utilities.Vector2D;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 
 public class StringObject extends GameObject {
 

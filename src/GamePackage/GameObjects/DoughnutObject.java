@@ -1,7 +1,7 @@
 package GamePackage.GameObjects;
 
-import utilities.SoundManager;
-import utilities.Vector2D;
+import GamePackage.utilities.SoundManager;
+import GamePackage.utilities.Vector2D;
 
 import java.awt.*;
 

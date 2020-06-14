@@ -1,8 +1,8 @@
 package GamePackage;
 
 import GamePackage.GameObjects.*;
-import utilities.HighScoreHandler;
-import utilities.Vector2D;
+import GamePackage.utilities.HighScoreHandler;
+import GamePackage.utilities.Vector2D;
 
 import java.util.ArrayList;
 import java.util.Arrays;

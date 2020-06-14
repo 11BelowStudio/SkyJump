@@ -1,7 +1,7 @@
 package GamePackage;
 
-import utilities.HighScoreHandler;
-import utilities.SoundManager;
+import GamePackage.utilities.HighScoreHandler;
+import GamePackage.utilities.SoundManager;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;

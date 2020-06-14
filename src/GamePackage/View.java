@@ -1,6 +1,6 @@
 package GamePackage;
 
-import utilities.ImageManager;
+import GamePackage.utilities.ImageManager;
 
 import javax.swing.*;
 import java.awt.*;

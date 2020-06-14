@@ -2,9 +2,9 @@ package GamePackage;
 
 
 import GamePackage.GameObjects.*;
-import utilities.HighScoreHandler;
-import utilities.SoundManager;
-import utilities.Vector2D;
+import GamePackage.utilities.HighScoreHandler;
+import GamePackage.utilities.SoundManager;
+import GamePackage.utilities.Vector2D;
 
 import java.util.Stack;
 

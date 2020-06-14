@@ -1,6 +1,6 @@
 package GamePackage.GameObjects;
 
-import utilities.Vector2D;
+import GamePackage.utilities.Vector2D;
 
 import java.awt.*;
 

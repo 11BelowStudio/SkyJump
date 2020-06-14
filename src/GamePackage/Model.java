@@ -1,15 +1,11 @@
 package GamePackage;
 
-import GamePackage.GameObjects.BackgroundObject;
-import GamePackage.GameObjects.DoughnutObject;
 import GamePackage.GameObjects.GameObject;
-import GamePackage.GameObjects.JumpPlatform;
-import utilities.HighScoreHandler;
+import GamePackage.utilities.HighScoreHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public abstract class Model {
 

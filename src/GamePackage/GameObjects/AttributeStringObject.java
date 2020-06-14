@@ -1,7 +1,7 @@
 package GamePackage.GameObjects;
 
-import utilities.AttributeString;
-import utilities.Vector2D;
+import GamePackage.utilities.AttributeString;
+import GamePackage.utilities.Vector2D;
 
 
 public class AttributeStringObject<T> extends StringObject {

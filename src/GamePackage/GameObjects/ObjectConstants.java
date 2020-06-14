@@ -1,6 +1,6 @@
 package GamePackage.GameObjects;
 
-import utilities.ImageManager;
+import GamePackage.utilities.ImageManager;
 
 import java.awt.*;
 import java.io.IOException;

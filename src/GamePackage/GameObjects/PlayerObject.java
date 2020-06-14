@@ -2,7 +2,7 @@ package GamePackage.GameObjects;
 
 import GamePackage.Action;
 import GamePackage.Controller;
-import utilities.Vector2D;
+import GamePackage.utilities.Vector2D;
 
 import java.awt.*;
 
