@@ -22,7 +22,6 @@ public abstract class GameObject {
     int height;
 
     static final double UP_RADIANS = Math.toRadians(270);
-    static final double DOWN_RADIANS = Math.toRadians(90);
 
 
     public GameObject(Vector2D p, Vector2D v){

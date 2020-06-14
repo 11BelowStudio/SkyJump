@@ -1,10 +1,5 @@
 package GamePackage;
 
-import GamePackage.Controller;
-import GamePackage.GameFrame;
-import GamePackage.Game;
-import GamePackage.Model;
-import GamePackage.TitleScreen;
 import utilities.HighScoreHandler;
 import utilities.SoundManager;
 
@@ -92,7 +87,7 @@ public class GameRunner {
 
             currentModel = modelSwapper(gameActive); //obtains the model which is to be displayed by view
             gameActive = !gameActive; //if the game was active, it now isn't (and vice versa)
-            view.showModel(currentModel, gameActive); //gets the view to display the appropriate model
+            view.showModel(currentModel); //gets the view to display the appropriate model
             frame.pack(); //repacks the frame
             repaintTimer.start(); //starts the repaintTimer
 

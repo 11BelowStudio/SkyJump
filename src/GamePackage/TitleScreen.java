@@ -5,26 +5,24 @@ import utilities.HighScoreHandler;
 import utilities.Vector2D;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Arrays;
+
 
 public class TitleScreen extends Model {
-
-    //TODO: this.
-
-    private int currentState;
+    
 
     private boolean showingTitle;
 
-    private StringObject titleText;
-    private StringObject subtitleText;
+    private final StringObject titleText;
+    private final StringObject subtitleText;
 
-    private StringObject play1;
-    private StringObject play2;
+    private final StringObject play1;
+    private final StringObject play2;
 
-    private StringObject quitText;
+    private final StringObject quitText;
 
 
-    private ArrayList<String> introList;
+    private final ArrayList<String> introList;
 
 
     public TitleScreen(Controller ctrl, HighScoreHandler hs) {
@@ -59,10 +57,7 @@ public class TitleScreen extends Model {
         };
 
         introList = new ArrayList<>();
-        for (String s:
-             introArray) {
-            introList.add(s);
-        }
+        introList.addAll(Arrays.asList(introArray));
     }
 
     @Override
@@ -152,7 +147,7 @@ public class TitleScreen extends Model {
             g.startScrolling(true);
         }
 
-        
+
         backgroundObjects.add(new BackgroundObject().revive());
         backgroundObjects.add(new BackgroundObject().revive());
         backgroundObjects.add(new BackgroundObject().revive());

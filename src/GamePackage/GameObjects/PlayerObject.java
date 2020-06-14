@@ -2,14 +2,9 @@ package GamePackage.GameObjects;
 
 import GamePackage.Action;
 import GamePackage.Controller;
-import utilities.ImageManager;
 import utilities.Vector2D;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import static GamePackage.Constants.DEFAULT_SIZE;
 import static GamePackage.Constants.DT;
@@ -25,7 +20,6 @@ public class PlayerObject extends GameObject {
     static final int APEX_HEIGHT = 96;
 
     Controller ctrl;
-    Action currentAction;
 
     int directionToDraw;
 
@@ -99,7 +93,6 @@ public class PlayerObject extends GameObject {
                     //96 to jump
                     velocity.y = -96;
                 }
-                System.out.println(position.y - APEX_HEIGHT);
                 yVelocityChange = UP_Y_CHANGE;
             }
 
@@ -157,8 +150,7 @@ public class PlayerObject extends GameObject {
         haveWeStartedTheFire = true;
 
         lowPlatformJump = (position.y > 320);
-        System.out.println(position.y - APEX_HEIGHT);
-        //return position.y - APEX_HEIGHT;
+
     }
 
     public boolean isLowPlatformJump(){

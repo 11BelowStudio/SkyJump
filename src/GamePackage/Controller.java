@@ -1,10 +1,8 @@
 package GamePackage;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 public class Controller implements KeyListener {
 
@@ -50,8 +48,4 @@ public class Controller implements KeyListener {
     public boolean theAnyButton(){ return action.theAnyButton; }
 
     public void noAction(){action.noAction();}
-
-    public boolean s(){ return action.getS(); }
-
-    public boolean n(){ return action.n; }
 }

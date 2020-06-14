@@ -6,7 +6,6 @@ import utilities.HighScoreHandler;
 import utilities.SoundManager;
 import utilities.Vector2D;
 
-import java.awt.*;
 import java.util.Stack;
 
 public class Game extends Model {
@@ -23,8 +22,6 @@ public class Game extends Model {
 
     static final double ABOVE_PLAT_2JUMP = -160;
     static final double ABOVE_PLAT_1JUMP = -352;
-
-
 
 
     Integer score;
@@ -239,6 +236,4 @@ public class Game extends Model {
         scoreDisplay.showValue(score);
     }
 
-
-    //TODO: change background colours over time (fade proportional to score?)
 }

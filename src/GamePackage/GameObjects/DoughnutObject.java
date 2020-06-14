@@ -55,11 +55,4 @@ public class DoughnutObject extends GameObject implements Collidable{
         return points;
     }
 
-    @Override
-    public void update() {
-        super.update();
-        if (!alive){
-            System.out.println("am dead at" + position + " + " + velocity );
-        }
-    }
 }
