@@ -1,11 +1,15 @@
 package GamePackage;
 
+import GamePackage.GameObjects.BackgroundObject;
+import GamePackage.GameObjects.DoughnutObject;
 import GamePackage.GameObjects.GameObject;
+import GamePackage.GameObjects.JumpPlatform;
 import utilities.HighScoreHandler;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public abstract class Model {
 
@@ -17,7 +21,13 @@ public abstract class Model {
     List<GameObject> aliveHUD;
     List<GameObject> aliveBackground;
 
-    List<GameObject> deadObjects;
+
+
+    int doughnutSpawnChance;
+    static final double DOUGHNUT_CHANCES = 10;
+
+    int backgroundSpawnChance;
+    static final double BACKGROUND_CHANCES = 5;
 
     Color backgroundColor;
     Rectangle backgroundRect = new Rectangle(0,0,512,512);
@@ -29,6 +39,8 @@ public abstract class Model {
     Controller ctrl;
 
     HighScoreHandler hs;
+
+
 
     //Sky blue: 94bfac
     static Color SKYBLUE =new Color(48, 191, 172);
@@ -49,9 +61,6 @@ public abstract class Model {
         aliveGameObjects = new ArrayList<>();
         aliveHUD = new ArrayList<>();
         aliveBackground = new ArrayList<>();
-
-        deadObjects = new ArrayList<>();
-
         gameOver = false;
         stopThat = false;
         backgroundColor = SKYBLUE;
@@ -96,26 +105,23 @@ public abstract class Model {
         aliveBackground.clear();
         aliveGameObjects.clear();
         aliveHUD.clear();
-        deadObjects.clear();
     }
 
     void endThis(){
         stopThat = true;
-    }
-
-    public Model revive(){
-        ctrl.noAction();
+        aliveGameObjects.clear();
+        aliveBackground.clear();
+        aliveHUD.clear();
         refreshLists();
-        backgroundObjects.clear();
-        gameObjects.clear();
-        hudObjects.clear();
-
-        return this;
     }
+
+    public abstract Model revive();
 
     abstract public void update();
 
     public boolean keepGoing(){
         return !stopThat;
     }
+
+    abstract void setupModel();
 }

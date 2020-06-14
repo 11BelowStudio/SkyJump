@@ -16,13 +16,13 @@ import static GamePackage.Constants.DELAY;
 
 public class GameRunner {
 
-    private GameFrame frame;
+    private final GameFrame frame;
 
-    private Game game;
-    private TitleScreen title;
-    private View view;
+    private final Game game;
+    private final TitleScreen title;
+    private final View view;
 
-    private Timer repaintTimer;
+    private final Timer repaintTimer;
 
     private boolean paused;
 
@@ -42,21 +42,11 @@ public class GameRunner {
         Controller ctrl = new Controller();
 
         frame.addKeyListener(ctrl);
-        frame.addMouseListener(ctrl);
+        //frame.addMouseListener(ctrl);
 
         view = new View();
 
         frame.addView(view);
-        //viewDimension = view.getPreferredSize();
-
-        /*
-         Basically, I intended to have something that would allow the game to be run in fullscreen,
-         editing the dimensions of View, and then, these dimensions would be compared to the default
-         dimensions (800 by 600), and would then cause the drawing stuff in view to be scaled in some way,
-         maybe changing the X and Y dimensions of the actual GameObjects within Model itself,
-         so everything would functionally still be the same, but I didn't get around to performing
-         the necessary refactoring in time before the deadline. anywho, ramble over, back to the code.
-         */
 
 
         //creating the two models
@@ -91,7 +81,7 @@ public class GameRunner {
 
     private void mainLoop() throws InterruptedException {
         Model currentModel; //the model which currently is active
-        boolean gameActive = false;//whether or not the game is the active model.
+        boolean gameActive = true;//whether or not the game is the active model.
                 // true by default so it swaps to the title screen on startup
 
         long startTime; //when it started the current update() call
@@ -105,7 +95,6 @@ public class GameRunner {
             view.showModel(currentModel, gameActive); //gets the view to display the appropriate model
             frame.pack(); //repacks the frame
             repaintTimer.start(); //starts the repaintTimer
-
 
             //AND NOW THE MODEL UPDATE LOOP
             while (currentModel.keepGoing()){ //keeps updating the model until the endGame variable of it is true
@@ -121,7 +110,6 @@ public class GameRunner {
                     Thread.sleep(timeout);
                 }
             }
-            //SoundManager.stopThrust();
 
             repaintTimer.stop();
         }
@@ -174,10 +162,8 @@ public class GameRunner {
 
 
     private static class EscapeListener extends KeyAdapter {
-        private GameRunner runner;
-        EscapeListener(GameRunner r) {
-            runner = r;
-        }
+        private final GameRunner runner;
+        EscapeListener(GameRunner r) { runner = r; }
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {

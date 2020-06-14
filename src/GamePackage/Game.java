@@ -24,11 +24,7 @@ public class Game extends Model {
     static final double ABOVE_PLAT_2JUMP = -160;
     static final double ABOVE_PLAT_1JUMP = -352;
 
-    int doughnutSpawnChance;
-    static final double DOUGHNUT_CHANCES = 10;
 
-    int backgroundSpawnChance;
-    static final double BACKGROUND_CHANCES = 5;
 
 
     Integer score;
@@ -57,8 +53,12 @@ public class Game extends Model {
     }
 
     @Override
-    public Model revive() {
-        super.revive();
+    public Game revive() {
+        ctrl.noAction();
+        refreshLists();
+        backgroundObjects.clear();
+        gameObjects.clear();
+        hudObjects.clear();
         setupModel();
         return this;
     }
@@ -104,8 +104,6 @@ public class Game extends Model {
             o.update();
             if (o.stillAlive()){
                 aliveHUD.add(o);
-            } else{
-                deadObjects.add(o);
             }
         }
 
@@ -119,18 +117,6 @@ public class Game extends Model {
                 }
             }
         }
-
-        /*
-        for (GameObject o: deadObjects){
-            if (o instanceof DoughnutObject){
-                doughnutStack.push((DoughnutObject) o);
-            } else if (o instanceof JumpPlatform){
-                platformStack.push((JumpPlatform) o);
-            } else if (o instanceof PlayerObject){
-                gameOver = true;
-                System.out.println("u died lmao");
-            }
-        }*/
 
         if (player.verticalDirectionChange()) { //OH BOY TIME TO START/STOP SCROLLING
             boolean lowJump = player.isLowPlatformJump();
@@ -189,7 +175,7 @@ public class Game extends Model {
         refreshLists();
     }
 
-    private void setupModel(){
+    void setupModel(){
 
         score = 0;
         gameObjects.add(player.revive());

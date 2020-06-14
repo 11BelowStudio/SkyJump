@@ -63,7 +63,7 @@ public class BackgroundObject extends GameObject {
         super.revive(
                 new Vector2D(
                         48 + (Math.random()*416),
-                        -32 + (Math.random() * -448)
+                        -32 + (Math.random() * -960)
                 ),
                 new Vector2D(0,0)
         );

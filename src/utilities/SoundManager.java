@@ -46,7 +46,7 @@ public class SoundManager {
     //private final static Clip solidHit = getClip("solidHit");
     //private final static Clip explosion = getClip("WeirdExplosion");
     //private final static Clip yerDead = getClip("yerDead");
-    //private final static Clip nice = getClip("nice");
+    private final static Clip nice = getClip("nice");
 
     //static {
         //Arrays.fill(bullets, clap);
@@ -137,7 +137,7 @@ public class SoundManager {
     //public static void playMedCrunch(){ play(mediumCrunch); }
     //public static void playIntimidating(){ play(intimidating); }
     //public static void playExplosion(){ play(explosion); }
-    //public static void playNice(){ play(nice); }
+    public static void playNice(){ play(nice); }
     //public static void playSolidHit(){ play(solidHit); }
     //public static void playLongCrunch(){ play(longCrunch);}
     //public static void playYerDead(){ play(yerDead); }

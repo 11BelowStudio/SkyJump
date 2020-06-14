@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Controller implements MouseListener, KeyListener {
+public class Controller implements KeyListener {
 
     Action action;
 
@@ -14,19 +14,10 @@ public class Controller implements MouseListener, KeyListener {
 
     public Action action(){ return this.action; }
 
-    public boolean isClicked() { return action.clicked; }
-
-    public Point clickLocation() {
-        if (isClicked()) {
-            action.clicked = false;
-            return action.clickLocation;
-        } else {
-            return null;
-        }
-    }
-
         @Override
-    public void keyTyped(KeyEvent e) {action.releasedTheAnyButton();}
+    public void keyTyped(KeyEvent e) {
+        //action.releasedTheAnyButton();
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -56,31 +47,11 @@ public class Controller implements MouseListener, KeyListener {
         //System.out.println(action.direction);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        action.releasedTheAnyButton();
-        action.clicked = false;
-        //doesn't count unless the click was in the GameFrame
-        if (e.getSource() instanceof GameFrame){
-            action.pressedTheAnyButton();
-            action.clicked = true;
-            action.clickLocation = e.getPoint();
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) { action.pressedTheAnyButton();}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {action.releasedTheAnyButton();}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
-
     public boolean theAnyButton(){ return action.theAnyButton; }
 
     public void noAction(){action.noAction();}
+
+    public boolean s(){ return action.getS(); }
+
+    public boolean n(){ return action.n; }
 }

@@ -17,6 +17,9 @@ public class StringObject extends GameObject {
     public static final int LEFT_ALIGN = 1;
     public static final int MIDDLE_ALIGN = 2;
 
+    private int w;
+    private int h;
+
 
     private Rectangle areaRectangle;
 
@@ -51,6 +54,8 @@ public class StringObject extends GameObject {
 
     public StringObject(Vector2D p, Vector2D v){
         super(p,v);
+        w = 0;
+        h = 0;
         alignment = 0;
         thisString = "";
         objectColour = Color.WHITE;
@@ -75,7 +80,11 @@ public class StringObject extends GameObject {
         return setText(s);
     }
 
-    public boolean isClicked(Point p){ return ((alive) && (areaRectangle.contains(p))); }
+    public boolean isClicked(Point p){
+        System.out.println(h);
+        System.out.println(w);
+        return false;
+    }
 
 
     @Override
@@ -85,8 +94,8 @@ public class StringObject extends GameObject {
             g.setFont(theFont);
             g.setColor(Color.black);
             FontMetrics metrics = g.getFontMetrics(g.getFont());
-            int w = metrics.stringWidth(thisString);
-            int h = metrics.getHeight();
+            w = metrics.stringWidth(thisString);
+            h = metrics.getHeight();
             int widthOffset;
             switch (alignment){
                 default:
@@ -116,13 +125,11 @@ public class StringObject extends GameObject {
     public StringObject setText(String s){ thisString = s; return this;}
 
 
+
     @Override
-    public void update(){
-        //only really used for scrolling text tbh
+    void amIAlive(){
         if (position.y < 0){
-            alive = false;
-        } else {
-            position.addScaled(velocity, GamePackage.Constants.DT);
+            this.alive = false;
         }
     }
 
