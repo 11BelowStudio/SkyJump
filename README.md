@@ -4,7 +4,7 @@ An entry for https://itch.io/jam/mini-jam-56-sky
 # funny links that may be of interest to you idk
 
 * ITCH.IO PAGE: https://11belowstudio.itch.io/skyjump
-* GITHUB REPO: https://github.com/11BelowStudio/SkyJump
+* GITHUB REPO: https://github.com/11BelowStudio/SkyJump (pls refer to the license on the git repo for license stuff)
 
 # HOW TO INSTALL/RUN
 
