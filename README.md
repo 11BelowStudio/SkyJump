@@ -43,5 +43,5 @@ An entry for https://itch.io/jam/mini-jam-56-sky
   * made using paint\.NET
 * code
   * done by me
-    * some parts of it were built off sample code provided by Dr. Dimitri Obigene
+    * some parts of it were built off sample code provided by Dr. Dimitri Ognibene
     * help with getting the images into the JAR file provided by JB Nizet on StackOverflow (https://stackoverflow.com/a/8362018)
